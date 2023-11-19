@@ -38,7 +38,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-	clangd = {},
+	clangd = {"c","cpp"},
 	pyright = {
 		python = {
 			analysis = {
@@ -132,6 +132,7 @@ null_ls.setup({
 			},
 		}),
 		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.completion.luasnip,
 	},
 })
 -- lspconfig
@@ -235,3 +236,4 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 })
+
