@@ -3,6 +3,9 @@
 
 # New line
 add_newline = false
+
+# format = '$all$directory$character'
+
 # Makes prompt is single line
 [line_break]
 disabled = true
@@ -43,9 +46,9 @@ style = "bold red"
 # format = '[\[$symbol$status\]]($style) '
 disabled = true
 
-[python]
-format = "[$symbol$version]($style) "
-style = "bold green"
+# [python]
+# format = "[$symbol$version]($style) "
+# style = "bold green"
 
 # Turn off container
 [container]
