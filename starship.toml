@@ -1,0 +1,52 @@
+# Get editor completions based on the config schema
+# "$schema" = 'https://starship.rs/config-schema.json'
+
+# New line
+add_newline = false
+# Makes prompt is single line
+[line_break]
+disabled = true
+
+# Show command duration 
+[cmd_duration]
+min_time = 10000
+format = 'took [$duration]($style) '
+
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+
+# [memory_usage]
+# format = "$symbol[${ram}]($style) "
+# show_percentage = true
+# threshold = 50
+# style = "bold dimmed white"
+# disabled = false
+
+[battery]
+charging_symbol = '[⚡️](bold green)'
+discharging_symbol = '[🔋](bold red)'
+
+[[battery.display]]  # "bold red" style when capacity is between 0% and 20%
+threshold = 20 
+style = "bold red"
+
+# [time]
+# disabled = false
+# time_format = "%R" # Hour:Minute Format
+# style = "bg:#6272a4"
+# format = '[  $time ]($style)'
+
+[status]
+# style = "bg:red"
+# symbol = "💣 "
+# format = '[\[$symbol$status\]]($style) '
+disabled = true
+
+[python]
+format = "[$symbol$version]($style) "
+style = "bold green"
+
+# Turn off container
+[container]
+disabled = true
