@@ -59,9 +59,9 @@ return {
 		-- Theme inspired by Atom
 		"navarasu/onedark.nvim",
 		priority = 1000,
-		-- config = function()
-		--   vim.cmd.colorscheme 'onedark'
-		-- end,
+		config = function()
+		  vim.cmd.colorscheme 'onedark'
+		end,
 	},
 	{ "ellisonleao/gruvbox.nvim" },
 	{ "tiagovla/tokyodark.nvim" },
@@ -137,105 +137,105 @@ return {
 		opts = {},
 	},
 	-- Noitice
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {
-			lsp = {
-				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
-				},
-				hover = {
-					enable = true,
-					silent = false,
-					view = nil,
-					---@type NoticeViewOptions
-					opts = {},
-				},
-				messages = {
-					enable = true,
-					view = "notify",
-					opts = {},
-				},
-				documentation = {
-					view = "hover",
-					opts = {
-						lang = "markdown",
-						replace = true,
-						render = "plain",
-						format = { "{message}" },
-						win_options = { concealcursor = "n", conceallevel = 3 },
-					},
-				},
-			},
-			-- you can enable a preset for easier configuration
-			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
-				command_palette = true, -- position the cmdline and popupmenu together
-				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
-			},
-			views = {
-				cmdline_popup = {
-					position = {
-						row = 5,
-						col = "50%",
-					},
-					size = {
-						width = 60,
-						height = "auto",
-					},
-				},
-				popupmenu = {
-					relative = "editor",
-					position = {
-						row = 8,
-						col = "50%",
-					},
-					size = {
-						width = 60,
-						height = 10,
-					},
-					border = {
-						style = "rounded",
-						padding = { 0, 1 },
-					},
-					win_options = {
-						winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-					},
-				},
-			},
-			format = {
-				cmdline = { pattern = "^:", icon = "", lang = "vim" },
-				search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-				search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-				filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-				lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
-				help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
-				input = {}, -- Used by input()
-			},
-			messages = {
-				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
-				-- This is a current Neovim limitation.
-				enabled = true, -- enables the Noice messages UI
-				view = "notify", -- default view for messages
-				view_error = "notify", -- view for errors
-				view_warn = "notify", -- view for warnings
-				view_history = "messages", -- view for :messages
-				view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
-			},
-		},
-		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			"rcarriga/nvim-notify",
-		},
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		lsp = {
+	-- 			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+	-- 			override = {
+	-- 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+	-- 				["vim.lsp.util.stylize_markdown"] = true,
+	-- 				["cmp.entry.get_documentation"] = true,
+	-- 			},
+	-- 			hover = {
+	-- 				enable = true,
+	-- 				silent = false,
+	-- 				view = nil,
+	-- 				---@type NoticeViewOptions
+	-- 				opts = {},
+	-- 			},
+	-- 			messages = {
+	-- 				enable = true,
+	-- 				view = "notify",
+	-- 				opts = {},
+	-- 			},
+	-- 			documentation = {
+	-- 				view = "hover",
+	-- 				opts = {
+	-- 					lang = "markdown",
+	-- 					replace = true,
+	-- 					render = "plain",
+	-- 					format = { "{message}" },
+	-- 					win_options = { concealcursor = "n", conceallevel = 3 },
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 		-- you can enable a preset for easier configuration
+	-- 		presets = {
+	-- 			bottom_search = true, -- use a classic bottom cmdline for search
+	-- 			command_palette = true, -- position the cmdline and popupmenu together
+	-- 			long_message_to_split = true, -- long messages will be sent to a split
+	-- 			inc_rename = false, -- enables an input dialog for inc-rename.nvim
+	-- 			lsp_doc_border = false, -- add a border to hover docs and signature help
+	-- 		},
+	-- 		views = {
+	-- 			cmdline_popup = {
+	-- 				position = {
+	-- 					row = 5,
+	-- 					col = "50%",
+	-- 				},
+	-- 				size = {
+	-- 					width = 60,
+	-- 					height = "auto",
+	-- 				},
+	-- 			},
+	-- 			popupmenu = {
+	-- 				relative = "editor",
+	-- 				position = {
+	-- 					row = 8,
+	-- 					col = "50%",
+	-- 				},
+	-- 				size = {
+	-- 					width = 60,
+	-- 					height = 10,
+	-- 				},
+	-- 				border = {
+	-- 					style = "rounded",
+	-- 					padding = { 0, 1 },
+	-- 				},
+	-- 				win_options = {
+	-- 					winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 		format = {
+	-- 			cmdline = { pattern = "^:", icon = "", lang = "vim" },
+	-- 			search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+	-- 			search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+	-- 			filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+	-- 			lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
+	-- 			help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+	-- 			input = {}, -- Used by input()
+	-- 		},
+	-- 		messages = {
+	-- 			-- NOTE: If you enable messages, then the cmdline is enabled automatically.
+	-- 			-- This is a current Neovim limitation.
+	-- 			enabled = true, -- enables the Noice messages UI
+	-- 			view = "notify", -- default view for messages
+	-- 			view_error = "notify", -- view for errors
+	-- 			view_warn = "notify", -- view for warnings
+	-- 			view_history = "messages", -- view for :messages
+	-- 			view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+	-- 		},
+	-- 	},
+	-- 	dependencies = {
+	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		-- OPTIONAL:
+	-- 		--   `nvim-notify` is only needed, if you want to use the notification view.
+	-- 		--   If not available, we use `mini` as the fallback
+	-- 		"rcarriga/nvim-notify",
+	-- 	},
+	-- },
 }

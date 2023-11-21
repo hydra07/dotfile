@@ -155,9 +155,24 @@ lspconfig.emmet_ls.setup({
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		"c",
+		"lua",
+		"python",
+		"typescript",
+		"javascript",
+		"rust",
+		"html",
+	},
+	sync_install = true,
+	ignore_install = {
+		"html",
+	},
 	rainbow = {
 		enable = true,
 		disable = {
+			"rust",
+			"python",
 			"vue",
 			"html",
 			"css",

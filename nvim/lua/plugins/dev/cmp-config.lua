@@ -2,6 +2,9 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local copilot = require("copilot_cmp")
+local tabnine = require("cmp_tabnine.config")
+local lspkind = require("lspkind")
+local html_css = require("html-css")
 local source_mapping = {
 	nvim_lsp = "[]",
 	luasnip = "[]",
@@ -10,15 +13,26 @@ local source_mapping = {
 	path = "[]",
 	rg = "[]",
 	copilot = "[]",
+	cmp_tabnine = "[]",
+	html_css = "[css]"
 }
 local duplicates = {
 	buffer = 1,
 	path = 1,
 	nvim_lsp = 0,
 	luasnip = 1,
+	cmp_tabnine = 3,
 }
+local has_words_before = function()
+	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+		return false
+	end
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+end
 luasnip.config.setup({})
 copilot.setup({})
+html_css:setup()
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -34,7 +48,7 @@ cmp.setup({
 			select = true,
 		}),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
+			if cmp.visible() and has_words_before() then
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
@@ -54,10 +68,11 @@ cmp.setup({
 	}),
 
 	sources = {
-		{ name = "copilot", group_index = 1 },
-		{ name = "luasnip", group_index = 2 },
-		{ name = "nvim_lsp", group_index = 2 },
-		{ name = "buffer", group_index = 3 },
+		{ name = "copilot",     group_index = 1 },
+		{ name = "luasnip",     group_index = 3 },
+		{ name = "nvim_lsp",    group_index = 3 },
+		{ name = "buffer",      group_index = 4 },
+		{ name = "cmp_tabnine", group_index = 2 },
 		{
 			name = "html-css",
 			option = {
@@ -68,7 +83,9 @@ cmp.setup({
 					"js",
 					"jsx",
 					"vue",
-				}, -- set the file types you want the plugin to work on
+					"ts",
+					"tsx",
+				},               -- set the file types you want the plugin to work on
 				file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
 				style_sheets = {
 					-- example of remote styles, only css no js for now
@@ -76,9 +93,10 @@ cmp.setup({
 					-- "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
 				},
 			},
+			group_index = 1
 		},
 		{ name = "nvim_lua" },
-		{ name = "path", group_index = 3 },
+		{ name = "path",    group_index = 4 },
 	},
 
 	-- window = {
