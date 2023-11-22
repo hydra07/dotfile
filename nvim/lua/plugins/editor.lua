@@ -46,8 +46,6 @@ return {
 		"folke/trouble.nvim",
 		cmd = "TroubleToggle",
 	},
-	{ "folke/which-key.nvim", opts = {} },
-
 	{ "kdheepak/lazygit.nvim" },
 	{ "windwp/nvim-autopairs" },
 	{
@@ -68,6 +66,9 @@ return {
 		requires = {
 			"neovim/nvim-lspconfig",
 			"SmiteshP/nvim-navic",
+		},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
 		},
 	},
 	{
@@ -125,14 +126,14 @@ return {
 			insert_mappings = true, -- whether or not the open mapping applies in insert mode
 			terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
 			persist_size = true,
-			persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
+			persist_mode = true,   -- if set to true (default) the previous terminal mode will be remembered
 			direction = "float",
-			close_on_exit = true, -- close the terminal window when the process exits
+			close_on_exit = true,  -- close the terminal window when the process exits
 
 			-- shell = vim.o.shell, -- change the default shell
 			shell = require("until").shell(), --set shell   pwsh
 
-			auto_scroll = true, -- automatically scroll to the bottom on terminal output
+			auto_scroll = true,            -- automatically scroll to the bottom on terminal output
 			-- This field is only relevant if direction is set to 'float'
 			float_opts = {
 				-- The border key is *almost* the same as 'nvim_open_win'
@@ -154,5 +155,9 @@ return {
 		cond = function()
 			return vim.fn.executable("make") == 1
 		end,
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 }

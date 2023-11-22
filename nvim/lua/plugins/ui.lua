@@ -7,6 +7,12 @@ return {
 			require("dashboard").setup({})
 		end,
 	},
+	{
+		"rcarriga/nvim-notify",
+		opts = {
+			timeout = 5000,
+		},
+	},
 
 	-- Bufferline
 	{
@@ -60,7 +66,7 @@ return {
 		"navarasu/onedark.nvim",
 		priority = 1000,
 		config = function()
-		  vim.cmd.colorscheme 'onedark'
+			vim.cmd.colorscheme("onedark")
 		end,
 	},
 	{ "ellisonleao/gruvbox.nvim" },

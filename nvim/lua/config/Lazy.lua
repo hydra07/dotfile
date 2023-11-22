@@ -35,5 +35,6 @@ require('lazy').setup({
     {import = "plugins.editor"},
     {import = "plugins.ui"},
     {import = "plugins.tool"},
+    {import = "plugins.whichkey"},
   }
 },{})

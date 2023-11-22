@@ -19,8 +19,8 @@ vim.keymap.set('n', "<C-s>" , ":w<CR>")
 vim.keymap.set('i', "<C-s>" , "<ESC>:w<CR>a")
 
 
-keymap.set('n', '<Leader>/', '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>')
-keymap.set('v', '<Leader>/', '<ESC><cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
+keymap.set('n', '<Leader>/', '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', {desc = "Comment"})
+keymap.set('v', '<Leader>/', '<ESC><cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>',{desc = "Comment"})
 -- Tabs
 keymap.set('n', 'te', ':tabedit<Return>', { silent = true })
 keymap.set('n', 'ss', ':split<Return><C-w>w', { silent = true })
@@ -43,8 +43,8 @@ keymap.set('n','<leader>x', ':<C-U>bprevious <bar> bdelete #<CR>')
 keymap.set('n','<leader>B', ':<C-U>bprevious <bar> bdelete #<CR>')
 
 
-vim.api.nvim_set_keymap('n', '<S-l>', '<cmd>BufferLineCycleNext<CR>', {})
-vim.api.nvim_set_keymap('n', '<S-h>', '<cmd>BufferLineCyclePrev<CR>', {})
+vim.api.nvim_set_keymap('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', {})
+vim.api.nvim_set_keymap('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', {})
 
 vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
 vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
@@ -84,7 +84,8 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-
+vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 'Resume'})
+vim.keymap.set('n', '<leader>st', require('telescope.builtin').treesitter, { desc = 'Treesitter'} )
 
 local nmap = function(keys, func, desc)
   if desc then
@@ -368,15 +369,15 @@ vim.keymap.set('n', "<leader>tq" , "<cmd>TroubleToggle workspace_diagnostics<cr>
 vim.keymap.set('n', "<leader>tl" , "<cmd>TroubleToggle workspace_diagnostics<cr><cmd>TroubleToggle loclist<cr>")
 vim.keymap.set('n', "<leader>tr" , "<cmd>TroubleToggle workspace_diagnostics<cr><cmd>TroubleToggle lsp_references<cr>")
 
-vim.keymap.set('n', "<leader>F" , "<cmd>lua vim.lsp.buf.formatting()<cr>")
-vim.keymap.set('n', "<leader>f" , "<cmd>lua vim.lsp.buf.format{async=true}<cr>")
+vim.keymap.set('n', "<leader>F" , "<cmd>lua vim.lsp.buf.formatting()<cr>",{desc = "Format"})
+vim.keymap.set('n', "<leader>f" , "<cmd>lua vim.lsp.buf.format{async=true}<cr>",{desc = "async Format "})
 vim.keymap.set('n', "<M-N>" , "*")
 
 
 
 vim.keymap.set('n', "<leader>N" , "*")
-vim.keymap.set('n', "<leader>n" , "<cmd>lua require('illuminate').goto_next_reference()<cr>")
-vim.keymap.set('n', "<leader>p" , "<cmd>lua require('illuminate').goto_prev_reference()<cr>")
+vim.keymap.set('n', "<leader>n" , "<cmd>lua require('illuminate').goto_next_reference()<cr>",{desc = "Next"})
+vim.keymap.set('n', "<leader>p" , "<cmd>lua require('illuminate').goto_prev_reference()<cr>",{desc = "Previous"})
 
 
 nmap('<leader>U', ':Navbuddy<CR>','Navbuddy')

@@ -146,4 +146,5 @@ vim.cmd [[
 ]]
 
 vim.g.icons_enabled = true
+-- vim.notify = require("notify")
 -- vim.g.indent_blankline_filetype_exclude = {'','lspinfo','checkhealth'}

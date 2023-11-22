@@ -14,7 +14,7 @@ local source_mapping = {
 	rg = "[]",
 	copilot = "[]",
 	cmp_tabnine = "[]",
-	html_css = "[css]"
+	html_css = "[css]",
 }
 local duplicates = {
 	buffer = 1,
@@ -50,7 +50,7 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() and has_words_before() then
 				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
+			elseif luasnip.expand_or_jumpable() and not has_words_before() then
 				luasnip.expand_or_jump()
 			else
 				fallback()
@@ -85,7 +85,7 @@ cmp.setup({
 					"vue",
 					"ts",
 					"tsx",
-				},               -- set the file types you want the plugin to work on
+				},                                       -- set the file types you want the plugin to work on
 				file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
 				style_sheets = {
 					-- example of remote styles, only css no js for now
@@ -93,17 +93,16 @@ cmp.setup({
 					-- "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
 				},
 			},
-			group_index = 1
+			group_index = 1,
 		},
 		{ name = "nvim_lua" },
 		{ name = "path",    group_index = 4 },
 	},
-
 	-- window = {
 	--   completion = cmp.config.window.bordered{
 	--     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	--     side_padding = -999,
-	--     col_offset = 0
+	--     -- side_padding = -999,
+	--     -- col_offset = 0
 	--   },
 	--   documentation = {
 	--     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },

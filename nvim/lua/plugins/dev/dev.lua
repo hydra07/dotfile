@@ -38,7 +38,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-	clangd = {"c","cpp"},
+	clangd = { "c", "cpp" },
 	pyright = {
 		python = {
 			analysis = {
@@ -66,7 +66,7 @@ local servers = {
 		cmd = { "typescript-language-server", "--stdio" },
 	},
 	tailwindcss = {
-		filetypes = { "html", "css", "scss" },
+		filetypes = { "html", "css", "scss","vue","tsx","jsx","ts","js" },
 	},
 	cssls = {
 		filetypes = { "vue", "css", "scss" },
@@ -83,6 +83,11 @@ local servers = {
 -- Setup neovim lua configuration
 require("neodev").setup()
 
+navic.setup({
+	highlight = true,
+	lazy_update_context = false,
+	click = true,
+})
 navbuddy.setup({})
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -128,7 +133,7 @@ null_ls.setup({
 				"typescript",
 				"typescriptreact",
 				"javascript",
-				"vue",
+				"vue"
 			},
 		}),
 		null_ls.builtins.formatting.stylua,
@@ -155,34 +160,34 @@ lspconfig.emmet_ls.setup({
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"c",
-		"lua",
-		"python",
-		"typescript",
-		"javascript",
-		"rust",
-		"html",
-	},
-	sync_install = true,
-	ignore_install = {
-		"html",
-	},
+	-- ensure_installed = {
+	-- 	"c",
+	-- 	"lua",
+	-- 	"python",
+	-- 	"typescript",
+	-- 	"javascript",
+	-- 	"rust",
+	-- 	"html",
+	-- },
+	-- sync_install = false,
+	-- ignore_install = {
+	-- 	"html",
+	-- },
 	rainbow = {
 		enable = true,
 		disable = {
-			"rust",
+			-- "rust",
 			"python",
 			"vue",
 			"html",
 			"css",
 			"scss",
-			"javascriptreact",
-			"typescriptreact",
-			"tsx",
-			"jsx",
-			"javascript.jsx",
-			"typescript.tsx",
+			-- "javascriptreact",
+			-- "typescriptreact",
+			-- "tsx",
+			-- "jsx",
+			-- "javascript.jsx",
+			-- "typescript.tsx",
 		},
 		extended_mode = true,
 		max_file_lines = nil,
@@ -193,7 +198,7 @@ require("nvim-treesitter.configs").setup({
 	-- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim' },
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-	auto_install = true,
+	-- auto_install = true,
 	-- open_on_setup = true,
 	highlight = { enable = true },
 	indent = { enable = true, disable = { "python" } },
@@ -251,4 +256,3 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 })
-
