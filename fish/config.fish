@@ -83,3 +83,6 @@ starship init fish | source
 # fish_update_completions
 # source ~/.config/fish/functions/fzf_key_bindings.fish
  # fish_config theme save "Catppuccin Mocha"
+
+# NVM auto load
+# status --is-login; and source (nvm use 18 --silent | psub)
