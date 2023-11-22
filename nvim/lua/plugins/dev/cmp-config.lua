@@ -14,14 +14,14 @@ local source_mapping = {
 	rg = "[]",
 	copilot = "[]",
 	cmp_tabnine = "[]",
-	html_css = "[css]",
+	html_css = "[]",
 }
 local duplicates = {
 	buffer = 1,
 	path = 1,
 	nvim_lsp = 0,
-	luasnip = 1,
-	cmp_tabnine = 3,
+	luasnip = 0,
+	cmp_tabnine = 1,
 }
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then

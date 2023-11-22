@@ -49,8 +49,10 @@ lspkind.init({
       TypeParameter = "",
       copilot = "",
       TabNine = "",
+      
+
     },
 })
 
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
-vim.api.nvim_set_hl(1, "CmpItemKindTabNine", {fg ="#FFFF00"})
+-- vim.api.nvim_set_hl(1, "CmpItemKindTabNine", {fg ="#FFFF00"})

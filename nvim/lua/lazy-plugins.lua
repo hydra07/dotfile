@@ -46,7 +46,8 @@ return {
     build = "make install_jsregexp",
     opts = {
       history = true,
-      delete_check_events = "TextChanged",
+      region_check_events = "CursorHold,InsertLeave",
+      delete_check_events = "TextChanged,InsertEnter",
     },
     -- stylua: ignore
     -- keys = {
