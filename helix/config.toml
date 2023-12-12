@@ -1,0 +1,32 @@
+# theme = "ayu"
+theme = "ayu_evolve"
+
+[editor]
+true-color = true
+line-number = "relative"
+auto-save = true
+color-modes = true
+bufferline = "multiple"
+shell = ["fish","-c"]
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-signature-help-docs = true
+# display-message = true
+
+[editor.statusline]
+right = ["version-control","diagnostics","selections","position","file-encoding"]
+
+# keymaps
+[keys.normal]
+C-s = ":w"
+
+[keys.insert]
+C-s = ":w"
