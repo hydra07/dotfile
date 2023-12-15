@@ -75,7 +75,7 @@ return {
   {
     -- Autocompletion
     "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-nvim-lsp", "saadparwaiz1/cmp_luasnip" },
+    dependencies = { "hrsh7th/cmp-nvim-lsp", "saadparwaiz1/cmp_luasnip", "roobert/tailwindcss-colorizer-cmp.nvim" },
   },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
@@ -91,7 +91,7 @@ return {
     -- end
   },
   -- Tabnine
-  { "codota/tabnine-nvim", build = "./dl_binaries.sh" },
+  -- { "codota/tabnine-nvim", build = "./dl_binaries.sh" },
   {
     "tzachar/cmp-tabnine",
     build = "./install.sh",
@@ -136,12 +136,12 @@ return {
     },
   },
 
-  {
-    "jayp0521/mason-nvim-dap.nvim",
-    -- event = "VeryLazy",
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-    -- enabled = vim.fn.has "win32" == 0,
-  },
+  -- {
+  --   "jayp0521/mason-nvim-dap.nvim",
+  --   -- event = "VeryLazy",
+  --   dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+  --   -- enabled = vim.fn.has "win32" == 0,
+  -- },
 
   {
     "windwp/nvim-ts-autotag",
@@ -159,6 +159,10 @@ return {
       vim.fn["mkdp#util#install"]()
     end,
   },
+  {
+    "dstein64/vim-startuptime",
+    -- opts = {},
+  }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.

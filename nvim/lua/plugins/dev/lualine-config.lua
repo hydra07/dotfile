@@ -70,7 +70,7 @@ local lsp_status = {
 			return msg
 		end
 	end,
-	icon = " LSP:",
+	-- icon = " LSP:",
 	color = { fg = "#ffffff", gui = "bold" },
 }
 
@@ -151,7 +151,7 @@ lualine.setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", diff, diagnostics },
-		lualine_c = { "filename" },
+		lualine_c = { "filename", lsp_status},
 		lualine_x = { encoding, "filetype", get_venv },
 		lualine_y = { file_size, "progress" },
 		lualine_z = { "location" },

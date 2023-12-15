@@ -5,6 +5,7 @@ local copilot = require("copilot_cmp")
 local tabnine = require("cmp_tabnine.config")
 local lspkind = require("lspkind")
 local html_css = require("html-css")
+local tailwindcss = require("tailwindcss-colorizer-cmp")
 local source_mapping = {
 	nvim_lsp = "[]",
 	luasnip = "[]",
@@ -68,16 +69,15 @@ cmp.setup({
 	}),
 
 	sources = {
-		{ name = "copilot",     group_index = 1 },
+		{ name = "copilot",     group_index = 2 },
 		{ name = "luasnip",     group_index = 3 },
-		{ name = "nvim_lsp",    group_index = 3 },
+		{ name = "nvim_lsp",    group_index = 1 },
 		{ name = "buffer",      group_index = 4 },
 		{ name = "cmp_tabnine", group_index = 2 },
 		{
 			name = "html-css",
 			option = {
 				max_count = {}, -- not ready yet
-
 				enable_on = {
 					"html",
 					"js",
@@ -112,7 +112,7 @@ cmp.setup({
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, item)
-			local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 40 })(entry, item)
+			local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 40 })(entry, item)
 			local source = entry.source.name
 			local menu = source_mapping[source]
 			local duplicates_default = 0
@@ -125,7 +125,7 @@ cmp.setup({
 				kind.abbr = string.sub(kind.abbr, 1, max_width - 1) .. "..."
 			end
 			kind.dup = duplicates[source] or duplicates_default
-			return kind
+			return tailwindcss.formatter(entry, item)
 		end,
 	},
 })
@@ -152,6 +152,7 @@ cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
+		{ name = "copilot" }
 	}, {
 		{ name = "cmdline" },
 	}),

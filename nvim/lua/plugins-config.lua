@@ -75,7 +75,6 @@ else
 end
 
 
-
 local status_goto, gotop = pcall(require, 'goto-preview')
 if (not status_goto) then
   print("Goto preview not added")
@@ -92,8 +91,6 @@ end
 
 -- vim.opt.termguicolors = true
 -- require("bufferline").setup{}
-
-
 
 local highlight = {
     "RainbowRed",
