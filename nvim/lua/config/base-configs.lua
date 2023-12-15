@@ -4,39 +4,9 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
--- Sync clipboard between OS and Neovim. Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
--- vim.o.clipboard = 'unnamedplus'
-if vim.fn.has("unix") == 1 then
-    vim.o.clipboard = 'unnamedplus'
-    vim.cmd("set clipboard+=unnamedplus")
-    -- vim.o.clipboard:append {'unnamedplus'}
-    vim.o.shell = "fish"
-elseif vim.fn.has("win32") == 1 then
-    vim.o.clipboard = 'unnamed'
-    vim.cmd("set clipboard+=unnamed")
-    -- vim.o.shell = "pwsh.exe"
-    -- vim.o.clipboard:prepend {'unnamed', 'unnamedplus'}
-elseif vim.fn.has("wsl") == 1 then
-    -- vim.cmd [[
-    --        augroup Yank
-    --        autocmd!
-    --        autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-    --        augroup END
-    --    ]]
-    vim.g.clipboard = {
-      name = 'win32yank',
-      copy = {
-            ['+'] = 'win32yank -i --crlf',
-            ['*'] = 'win32yank -i --crlf'
-	      },
-	      paste = {
-            ['+'] = 'win32yank -o --lf',
-            ['*'] = 'win32yank -o --lf'
-	  }
-}
-end
-
+-- clipboard
+-- require("until").shell()
+vim.opt.clipboard = "unnamedplus"
 
 -- Enable break indent
 vim.o.breakindent = true

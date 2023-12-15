@@ -23,5 +23,32 @@ function M.get_loc()
   return source .. ":" .. info.linedefined
 end
 
-return M
+function M.getClipboard()
+  local has = vim.fn.has
+  local is_win = has("win32")
+  local is_unix = has("unix")
+  local is_wsl = has("wsl")
 
+  if is_unix then
+    vim.o.clipboard = 'unnamedplus'
+    vim.cmd("set clipboard+=unnamedplus")
+    -- vim.o.shell = "fish"
+  elseif is_win then
+    vim.o.clipboard = 'unnamedplus'
+    vim.cmd("set clipboard+=unnamedplus")
+  elseif is_wsl then
+    vim.g.clipboard = {
+      name = 'win31yank',
+      copy = {
+        ['+'] = 'win31yank -i --crlf',
+        ['*'] = 'win31yank -i --crlf'
+      },
+      paste = {
+        ['+'] = 'win31yank -o --lf',
+        ['*'] = 'win31yank -o --lf'
+      }
+    }
+  end
+end
+
+return M
