@@ -1,5 +1,4 @@
 local icons = {}
-
 icons.layout = {
   list = "•",
   tab = "→",
@@ -8,7 +7,6 @@ icons.layout = {
   pending = "➜",
   uninstalled = "✗",
 }
-
 icons.widget = {
   active = "",
   command = "",

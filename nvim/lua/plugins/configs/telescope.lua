@@ -10,8 +10,9 @@ else
         "node_modules/*",
         ".git/*",
         ".env/",
+        ".next",
+        "yarn.lock"
       },
-
       mappings = {
         i = {
           -- ['<C-u>'] = true,

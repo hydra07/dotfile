@@ -89,9 +89,9 @@ local servers = {
 			},
 		},
 	},
-	emmet_ls = {
-		filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "vue" },
-	},
+	-- emmet_ls = {
+	-- 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "vue" },
+	-- },
 	bashls = {
 		single_file_support = true,
 	},
@@ -103,6 +103,10 @@ local on_attach = function(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
 		-- client.server_capabilities.documentFormattingProvider = true
 		client.server_capabilities.documentRangeFormattingProvider = false
+
+		if (client.name == "tailwindcss" ) then
+			require("tailwindcss-colors").buf_attach(bufnr)
+		end
 	else
 		client.server_capabilities.documentFormattingProvider = true -- 0.8 and later
 		client.server_capabilities.documentRangeFormattingProvider = true
@@ -112,6 +116,7 @@ local on_attach = function(client, bufnr)
 		navic.attach(client, bufnr)
 		-- navbuddy.attach(client, bufnr)
 	end
+
 	-- if client.name ~= 'tailwindcss' then
 	--   formatting_callback(client, bufnr)
 	--   print(client.name)
@@ -137,7 +142,6 @@ capabilities.textDocument.completion.completionItem = {
 		},
 	},
 }
-
 lspconfig.util.on_setup = lspconfig.util.add_hook_after(lspconfig.util.on_setup, function(config)
 	config.capabilities = vim.tbl_deep_extend("force", config.capabilities, cmp.default_capabilities())
 	config.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
@@ -150,7 +154,6 @@ mason.setup({})
 mason_lspconfig.setup({
 	ensure_installed = vim.tbl_keys(servers),
 })
-
 mason_lspconfig.setup_handlers({
 	function(server_name)
 		require("lspconfig")[server_name].setup({

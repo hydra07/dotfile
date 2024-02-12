@@ -7,6 +7,7 @@ local copilot = require("copilot_cmp")
 local lspkind = require("lspkind")
 local html_css = require("html-css")
 local tailwindcss = require("tailwindcss-colorizer-cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local source_mapping = {
 	nvim_lsp = "[]",
 	luasnip = "[]",
@@ -35,6 +36,8 @@ end
 luasnip.config.setup({})
 copilot.setup({})
 html_css:setup()
+require("nvim-autopairs").setup()
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -46,9 +49,11 @@ cmp.setup({
 		["<C-k>"] = cmp.mapping.scroll_docs(4),
 		["<C-b>"] = cmp.mapping.complete({}),
 		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
+			-- behavior = cmp.ConfirmBehavior.Replace,
+			-- select = true,
+			-- select = false,
 		}),
+		["<C-Space>"] = cmp.mapping.complete(),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() and has_words_before() then
 				cmp.select_next_item()
@@ -67,18 +72,20 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
+		-- ["<Esc>"] = cmp.mapping.close(),
 	}),
 
 	sources = {
-		{ name = "copilot",     group_index = 2 },
-		{ name = "luasnip",     group_index = 3 },
-		{ 
-			name = "nvim_lsp",    group_index = 1, 
+		{ name = "copilot", group_index = 2 },
+		{ name = "luasnip", group_index = 3 },
+		{
+			name = "nvim_lsp",
+			group_index = 1,
 			entry_filter = function(entry)
-				return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
-			end 
+				return cmp.lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+			end,
 		},
-		{ name = "buffer",      group_index = 4 },
+		{ name = "buffer",  group_index = 4 },
 		-- { name = "cmp_tabnine", group_index = 2 },
 		{
 			name = "html-css",
@@ -91,7 +98,7 @@ cmp.setup({
 					"vue",
 					"ts",
 					"tsx",
-				},                                       -- set the file types you want the plugin to work on
+				},               -- set the file types you want the plugin to work on
 				file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
 				style_sheets = {
 					-- example of remote styles, only css no js for now
@@ -102,7 +109,7 @@ cmp.setup({
 			group_index = 1,
 		},
 		{ name = "nvim_lua" },
-		{ name = "path",  group_index = 4 },
+		{ name = "path",    group_index = 3 },
 	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
@@ -132,20 +139,20 @@ cmp.setup.filetype("gitcommit", {
 		{ name = "buffer" },
 	}),
 })
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ "/", "?" }, {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = "buffer" },
-	},
-})
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = "path" },
-		-- { name = "copilot" }
-	}, {
-		{ name = "cmdline" },
-	}),
-})
+-- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline({ "/", "?" }, {
+-- 	mapping = cmp.mapping.preset.cmdline(),
+-- 	sources = {
+-- 		{ name = "buffer" },
+-- 	},
+-- })
+-- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(":", {
+-- 	mapping = cmp.mapping.preset.cmdline(),
+-- 	sources = cmp.config.sources({
+-- 		{ name = "path" },
+-- 		-- { name = "copilot" }
+-- 	}, {
+-- 		{ name = "cmdline" },
+-- 	}),
+-- })

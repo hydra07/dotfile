@@ -96,28 +96,8 @@ vim.cmd [[
   vnoremap < <gv
 ]]
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
 vim.g.icons_enabled = true
 -- vim.notify = require("notify")
 -- vim.g.indent_blankline_filetype_exclude = {'','lspinfo','checkhealth'}
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*.py" },
-  command = "setlocal tabstop=2 shiftwidth=2"
-})
 
-vim.cmd[[ 
-  let g:python_recommended_style = 0
-  autocmd FileType java setlocal tabstop=2 shiftwidth=2 expandtab
-]]
-if vim.g.neovide then
-  require('core.neovide') 
-end
+
